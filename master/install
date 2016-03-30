@@ -1,3 +1,7 @@
 #!/bin/bash
 
-wget https://raw.githubusercontent.com/projectcalico/calico-cni/k8s-1.1-docs/samples/kubernetes/cloud-config/master-config-template.yaml -O master-config.yaml
+# Not download. Уже настроеный файл есть
+#wget https://raw.githubusercontent.com/projectcalico/calico-cni/k8s-1.1-docs/samples/kubernetes/cloud-config/master-config-template.yaml -O master-config.yaml
+
+sudo coreos-install -d /dev/sda -C stable -c master-config.yaml
+sudo reboot

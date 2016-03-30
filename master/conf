@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Generate the necessary certificates for the master
+# https://coreos.com/kubernetes/docs/latest/openssl.html
+openssl genrsa -out ca-key.pem 2048
+openssl req -x509 -new -nodes -key ca-key.pem -days 10000 -out ca.pem -subj "/CN=kube-ca"
+
+
+# Move keys
+sudo mkdir -p /etc/kubernetes/ssl/
+sudo mv -t /etc/kubernetes/ssl/ ca.pem apiserver.pem apiserver-key.pem
+    
+# Set Permissions
+sudo chmod 600 /etc/kubernetes/ssl/apiserver-key.pem
+sudo chown root:root /etc/kubernetes/ssl/apiserver-key.pem
